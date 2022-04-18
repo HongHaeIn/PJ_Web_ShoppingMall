@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShoppingPage</title>
+    <script src="./main.js"></script>
+    <style>
+        *{
+            text-align: center;
+            margin:  0px;
+        }
+        .contain{
+            display: grid;
+            grid-template-columns: ifr;
+            grid-template-rows: repeat(3, 150px 50px 300px 700px);
+                grid-template-areas: 
+                'header'
+                'nav'
+                'section'
+                'main'
+                ;
+        }
+        .header{
+            grid-area: header;
+            background-color: white;
+            margin-top: 10px;
+        }
+        /* 메뉴 */
+        .nav{
+            grid-area: nav;
+            background-color:darkgray;
+        }
+        ol li{
+            display: inline-block;
+            padding: 10px;
+            font-size: 20px;
+        }
+        #navmanu:link{
+            text-decoration: none;
+            color: #1f1e1e;
+        }
+        #navmanu:visited{
+            text-decoration: none;
+            color:#1f1e1e;
+        }
+        #navmanu:hover{
+            text-decoration: underline;
+            color: rgb(78, 78, 78);
+        }
+        #Pnavmanu:hover{
+            opacity: 0.4;
+        }
+        #navmanu:active{
+            text-decoration: underline;
+            color: rgb(78, 78, 78);
+            
+        }
+        /* 사진섹션 */
+        .section{
+            grid-area: section;
+        }
+        .section input[id*="slide"]{
+            display: none;
+        }
+        .section .slidewrap{
+            max-width: 1004px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .section .slidelist{
+            white-space: nowrap;
+            font-size: 0;
+            padding: 0px;
+        }
+        .section .slidelist >li{
+            display: inline-block;
+            vertical-align: middle;
+            width: 100%;
+            transition: all .5s;
+        }
+        .section .slidelist > li> a{
+            display: block;
+            position: relative;
+        }
+        .section .slidelist > li> a img{
+            width: 100%;
+        }
+        .section .slidelist label{
+            position:absolute;
+            z-index: 10;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 50px;
+            cursor: pointer;
+        }
+        .section .slidelist .left{
+            left:10px;
+            background: url('./SHOPPINGIMG/left.png') center center / 100% no-repeat;
+        }
+        .section .slidelist .right{
+            right: 10px;
+            background: url("./SHOPPINGIMG/right.png") center center;
+        }
+        .section [id="slide1"]:checked~ .slidewrap .slidelist > li {transform: translateX(0%);}
+        .section [id="slide2"]:checked~ .slidewrap .slidelist > li {transform: translateX(-100%);}
+        .section [id="slide3"]:checked~ .slidewrap .slidelist > li {transform: translateX(-200%);}
+
+        /* 메인 */
+        .main{
+            grid-area: main;
+            background-color: rgb(255, 255, 255);
+        }
+
+        /*메뉴아이콘*/
+        input[id="menuicon"]{
+            display: none;
+        }
+        input[id="menuicon"] +label{
+            display: block;
+            width: 30px;
+            height: 30px;
+            position: fixed;
+            top: 0;
+            cursor: pointer;
+        }
+        input[id="menuicon"]+label span{
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 5px;
+            border-radius: 30px;
+            background-color: #000;
+            transition: all .35s;
+        }
+        input[id="menuicon"]+label span:nth-child(1){
+            top: 0;
+        }
+        input[id="menuicon"]+label span:nth-child(2){
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        input[id="menuicon"]+label span:nth-child(3){
+            bottom: 0;
+        }
+        input[id="menuicon"]:checked+label{
+            z-index: 2;
+        }
+        input[id="menuticon"]:checked+label+span{
+            background-color: #000;
+        }
+        input[id="menuicon"]:checked+label span:nth-child(1){
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+        input[id="menuicon"]:checked+label span:nth-child(2){
+            opacity: 0;
+        }
+        input[id="menuicon"]:checked+label span:nth-child(3){
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
+        }
+        /* 사이드바 */
+        div[class="sidebar"]{
+            width: 300px;
+            height: 100%;
+            background-color: rgb(73, 73, 73);
+            position: fixed;
+            top: 0;
+            left: -300px;
+            z-index: 1;
+            transition:all .35s;
+        }
+        input[id="menuicon"]:checked +label +div{
+            left: 0;
+        }
+        #ccc{
+            position: relative;
+            left: 0px;
+            top: 30px; 
+            font-size: 25px;
+        }
+        #log{
+            position: relative;
+            left: 30px;
+            top: 60px; 
+            font-size: 25px;
+            width: fit-content;
+            text-align: center;
+        }
+        #lele{
+            position: relative;
+            top: 100px; 
+            font-size: 25px;
+        }
+        a:link{
+            text-decoration: none;
+            color: #cccccc;
+        }
+        a:visited{
+            text-decoration: none;
+            color: #cccccc;
+        }
+        a:hover{
+            text-decoration: underline;
+            color: rgb(19, 19, 19);
+        }
+        a:active{
+            text-decoration: underline;
+            color: rgb(19, 19, 19);
+            
+        }
+        #ppp{
+            position: relative;
+            left: 5px;
+            top: 300px; 
+        }
+    </style>
+</head>
+<body>
+    <div class="contain">
+        <div class="header">
+            <img src="./SHOPPINGIMG/Hailey.png" height="130px">
+        </div>
+        <!-- 메뉴 -->
+        <div class="nav">
+            <ol>
+                <li><a href="ShoppingPage.html" id="Pnavmanu" ><img src="./SHOPPINGIMG/Home.png"></a></li>
+                <li><a href="top.html" id="navmanu" target="H">TOP</a></li>
+                <li><a href="outer.html" id="navmanu" target="H">OUTER</a></li>
+                <li><a href="dress.html" id="navmanu" target="H">DRESS / SKIRT</a></li>
+                <li><a href="pnats.html" id="navmanu" target="H">PANTS</a></li>
+                <li><a href="shose.html" id="navmanu" target="H">SHOSE</a></li>
+                <li><a href="act.html" id="navmanu" target="H">ACT</a></li>
+                <li><a href="bag.html" id="navmanu" target="H">BAG</a></li>
+                <li><div><input type="text" name="uid" placeholder="What you looking" id="navmanu">
+                    <button type="submit" id="navmanu">click</button></div></li>
+            </ol> 
+        </div>
+        <!-- 사진섹션 -->
+        <div class="section">
+            <input type="radio" name="slide" id="slide1" checked>
+            <input type="radio" name="slide" id="slide2">
+            <input type="radio" name="slide" id="slide3">
+
+            <div class="slidewrap">
+                <ul class="slidelist">
+                    <li>
+                        <a>
+                            <label for="slide3" class="left"></label>
+                            <img src="./SHOPPINGIMG/코트.png">
+                            <label for="slide2" class="right"></label>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <label for="slide1" class="left"></label>
+                            <img src="./SHOPPINGIMG/목도리.png">
+                            <label for="slide3" class="right"></label>
+                        </a>
+                    </li>
+                    <li>
+                        <a>
+                            <label for="slide2" class="left"></label>
+                            <img src="./SHOPPINGIMG/Shose.png">
+                            <label for="slide1" class="right"></label>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- 메인 -->
+        <div class="main">
+            <iframe height="690px" width="1000px" src="main.html" name="H"></iframe>
+        </div>
+        <!-- 메뉴아이콘 -->
+        <input type="checkbox" id="menuicon">
+        <label for="menuicon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </label>
+        <!-- 사이드바 -->
+        <div class="sidebar">
+            <div id="ccc"> 
+                <input type="text" name="uid" placeholder="what you looking">
+                <button type="submit">click</button></div>
+            <div id="log"><fieldset>
+                <legend>🖤LOGIN🖤</legend>
+                <div class="container">
+                <label class="a">ID</label><input type="text" id="a" name="uid"></label><br>
+                <label class="b">PW<input type="text"  id="b" name="uid"></label><br>
+                <button type="submit">click</button>
+            </div>
+            </fieldset></div>
+            <div  id="lele" ><a href="장바구니.html" onclick="alert('아직 지원하지 않는 기능입니다. 뒤로가기->')">장바구니</a></div>
+            <div id="lele" ><a href="이벤트.html" onclick="alert('아직 지원하지 않는 기능입니다. 뒤로가기->')">이벤트</a></div>
+            <div id="lele" ><a href="고객센터.html" onclick="alert('아직 지원하지 않는 기능입니다. 뒤로가기->')">고객센터</a></div>
+            <div id="ppp">010-899-5892</div>
+            <div id="ppp">(주)MIRIMMIRIM</div>
+            <div id="ppp">사이트 제작자: 홍해인</div>
+            <div id="ppp">대장 : 홍해인</div>
+        </div>
+    </div>
+</body>
+</html>
